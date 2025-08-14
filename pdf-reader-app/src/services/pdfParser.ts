@@ -1,4 +1,9 @@
-import { PDFDocument } from 'pdf-lib';
+import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
+// @ts-ignore - vite worker import
+import PdfJsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?worker';
+
+// Bind worker (required for pdf.js with Vite)
+GlobalWorkerOptions.workerPort = new PdfJsWorker();
 
 export async function parsePdf(file: File): Promise<string> {
     const arrayBuffer = await file.arrayBuffer();
@@ -7,14 +12,19 @@ export async function parsePdf(file: File): Promise<string> {
     return textContent;
 }
 
-async function extractTextFromPdf(pdfDoc: PDFDocument): Promise<string> {
-    let text = '';
-    const pages = pdfDoc.getPages();
+export async function extractTextFromPdf(file: File): Promise<string> {
+  const arrayBuf = await file.arrayBuffer();
+  const loadingTask = getDocument({ data: arrayBuf });
+  const pdf = await loadingTask.promise;
+  const parts: string[] = [];
 
-    for (const page of pages) {
-        const { text: pageText } = await page.getTextContent();
-        text += pageText + '\n';
-    }
-
-    return text;
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
+    const content = await page.getTextContent();
+    const text = content.items
+      .map((it: any) => ('str' in it ? it.str : ''))
+      .join(' ');
+    parts.push(text);
+  }
+  return parts.join('\n\n');
 }

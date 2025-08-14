@@ -1,28 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getVoices, onVoicesChanged } from '../services/aiReader';
+import type { VoiceSettings } from '../types';
 
-const VoiceSelector = ({ onVoiceChange }) => {
-    const [selectedVoice, setSelectedVoice] = useState('');
+declare global {
+  interface Window { voiceSettings?: VoiceSettings; }
+}
 
-    const voices = window.speechSynthesis.getVoices();
+export default function VoiceSelector() {
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [voiceURI, setVoiceURI] = useState<string>();
+  const [rate, setRate] = useState(1);
+  const [pitch, setPitch] = useState(1);
 
-    const handleVoiceChange = (event) => {
-        const voice = event.target.value;
-        setSelectedVoice(voice);
-        onVoiceChange(voice);
-    };
+  useEffect(() => {
+    const load = () => setVoices(getVoices());
+    load();
+    onVoicesChanged(load);
+  }, []);
 
-    return (
-        <div>
-            <label htmlFor="voice-select">Select Voice:</label>
-            <select id="voice-select" value={selectedVoice} onChange={handleVoiceChange}>
-                {voices.map((voice, index) => (
-                    <option key={index} value={voice.name}>
-                        {voice.name} ({voice.lang})
-                    </option>
-                ))}
-            </select>
-        </div>
-    );
-};
+  useEffect(() => {
+    window.voiceSettings = { voiceURI, rate, pitch };
+  }, [voiceURI, rate, pitch]);
 
-export default VoiceSelector;
+  return (
+    <div className="controls">
+      <label className="small">Voice</label>
+      <select
+        value={voiceURI ?? ''}
+        onChange={(e) => setVoiceURI(e.target.value || undefined)}
+      >
+        <option value="">Default</option>
+        {voices.map(v => (
+          <option key={v.voiceURI} value={v.voiceURI}>
+            {v.name} ({v.lang})
+          </option>
+        ))}
+      </select>
+
+      <label className="small">Rate {rate.toFixed(1)}</label>
+      <input type="range" min={0.5} max={2} step={0.1}
+        value={rate} onChange={e => setRate(parseFloat(e.target.value))} />
+
+      <label className="small">Pitch {pitch.toFixed(1)}</label>
+      <input type="range" min={0} max={2} step={0.1}
+        value={pitch} onChange={e => setPitch(parseFloat(e.target.value))} />
+    </div>
+  );
+}
