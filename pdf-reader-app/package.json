@@ -1,0 +1,33 @@
+{
+  "name": "pdf-reader-app",
+  "version": "1.0.0",
+  "description": "A PDF reader application that utilizes AI for text-to-speech functionality and highlights text as it is read.",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "pdfjs-dist": "^2.10.377",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4",
+    "ts-node": "^10.4.0",
+    "jest": "^27.0.6",
+    "@types/jest": "^27.0.2"
+  },
+  "keywords": [
+    "pdf",
+    "reader",
+    "text-to-speech",
+    "ai",
+    "highlight"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
