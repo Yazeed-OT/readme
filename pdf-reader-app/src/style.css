@@ -1,3 +1,100 @@
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.controls-bar .book-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.controls-bar .page-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media (max-width: 900px) {
+  .controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .controls-bar .book-controls,
+  .controls-bar .page-controls {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+}
+body.dark {
+  background: #181a20;
+  color: #f3f3fa;
+}
+body.dark .header {
+  background: #23263a;
+  color: #fff;
+}
+body.dark .header .nav a,
+body.dark .header .user {
+  color: #fff;
+}
+body.dark .main-container {
+  background: transparent;
+}
+body.dark .book-card {
+  background: #23263a;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+body.dark .book-page {
+  background: #23263a;
+  color: #f3f3fa;
+  border: 1px solid #35395a;
+}
+body.dark .book-page.highlighted {
+  background: #2d2a1f;
+  color: #fffbe7;
+}
+body.dark .book-controls button,
+body.dark .page-controls button {
+  background: #4f5bd5;
+  color: #fff;
+}
+body.dark .book-controls button:disabled {
+  background: #444a6a;
+}
+body.dark .book-controls button:hover:not(:disabled),
+body.dark .page-controls button:hover:not(:disabled) {
+  background: #283593;
+}
+body.dark .progress-bar .bar {
+  background: #35395a;
+}
+body.dark .progress-bar .bar-inner {
+  background: #7986cb;
+}
+body.dark .progress-bar {
+  color: #c2c6e2;
+}
+body.dark input,
+body.dark select {
+  background: #23263a;
+  color: #f3f3fa;
+  border: 1px solid #7986cb;
+}
+body.dark input[type="file"] {
+  background: #23263a;
+  color: #f3f3fa;
+  border: 1px solid #7986cb;
+}
+body.dark label,
+body.dark span,
+body.dark .book-controls label,
+body.dark .book-controls span {
+  color: #e0e0fa;
+}
 body {
   margin: 0;
   background: #f4f6fa;
