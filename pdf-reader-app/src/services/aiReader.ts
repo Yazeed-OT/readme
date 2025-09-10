@@ -34,7 +34,7 @@ export async function speak(
   onBoundary?: (globalCharIndex: number) => void
 ) {
   cancel();
-  const chunks = splitIntoChunks(text, 1600);
+  const chunks = splitIntoChunks(text, 1800);
   let baseIndex = 0;
 
   for (const chunk of chunks) {

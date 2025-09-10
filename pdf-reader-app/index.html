@@ -6,65 +6,9 @@
   <title>Book Reader</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,400italic&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/style.css">
-  </head>
-  <body>
-  <div class="header">
-    <div class="logo">Book Reader</div>
-    <div class="nav">
-      <a href="#">My Books</a>
-      <a href="#">Upload Book</a>
-    </div>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <button id="themeToggle" style="background:transparent;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">🌙</button>
-      <div class="user">user1</div>
-    </div>
-  </div>
-  <div class="main-container">
-    <div class="controls-bar">
-      <div class="book-controls">
-        <label for="voiceSelect">Voice:</label>
-        <select id="voiceSelect"></select>
-        <label for="rate">Rate</label>
-        <span id="rateValue">1.0</span>
-        <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
-        <label for="pitch">Pitch</label>
-        <span id="pitchValue">1.0</span>
-        <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
-        <input type="file" id="fileInput">
-      </div>
-      <div class="page-controls">
-        <button id="prevPageBtn">&lt; Previous</button>
-        <button id="nextPageBtn">Next &gt;</button>
-        <button id="readBtn">Read Aloud</button>
-        <button id="stopBtn">Stop</button>
-      </div>
-    </div>
-      <div class="book-card">
-        <div class="book-page" id="pageLeft">
-          <span style="color:#aaa;">Load a PDF to see extracted text here.</span>
-        </div>
-        <div class="book-page" id="pageRight"></div>
-      </div>
-      <div class="progress-bar">
-        <div class="bar"><div class="bar-inner" id="progressBar"></div></div>
-        <span id="progressText">0% read</span>
-      </div>
-    </div>
-  </body>
-  <script>
-    // Theme toggle logic
-    const themeToggle = document.getElementById('themeToggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    function setTheme(dark) {
-      document.body.classList.toggle('dark', dark);
-      themeToggle.textContent = dark ? '☀️' : '🌙';
-      localStorage.setItem('theme', dark ? 'dark' : 'light');
-    }
-    themeToggle.addEventListener('click', () => {
-      setTheme(!document.body.classList.contains('dark'));
-    });
-    // On load
-    const saved = localStorage.getItem('theme');
-    setTheme(saved ? saved === 'dark' : prefersDark);
-  </script>
-      </html>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

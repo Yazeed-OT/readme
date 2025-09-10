@@ -41,7 +41,10 @@ function mergeHyphenatedLines(lines: string[]): string[] {
   return merged;
 }
 
-export async function extractTextFromPdf(file: File): Promise<string> {
+export async function extractTextFromPdf(
+  file: File,
+  onProgress?: (info: { page: number; total: number }) => void
+): Promise<string> {
   const arrayBuf = await file.arrayBuffer();
   const loadingTask = getDocument({ data: arrayBuf });
   const pdf = await loadingTask.promise;
@@ -110,6 +113,7 @@ export async function extractTextFromPdf(file: File): Promise<string> {
     // Create page text: separate lines with newlines, add page break
     const pageText = cleaned.join('\n');
     pages.push(pageText);
+    onProgress?.({ page: pageNum, total: pdf.numPages });
   }
 
   // Separate pages with blank lines
