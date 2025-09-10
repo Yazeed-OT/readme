@@ -18,13 +18,13 @@ export interface HighlightedTextProps {
 
 export type VoiceSettings = {
   voiceURI?: string;
-  rate?: number;   // 0.1 - 10
-  pitch?: number;  // 0 - 2
+  rate?: number;
+  pitch?: number;
   lang?: string;
 };
 
-// Vite worker import shim for pdf.js
-declare module 'pdfjs-dist/build/pdf.worker.min.mjs?worker' {
+// Generic shim so TS accepts ?worker imports
+declare module '*?worker' {
   const WorkerCtor: new () => Worker;
   export default WorkerCtor;
 }

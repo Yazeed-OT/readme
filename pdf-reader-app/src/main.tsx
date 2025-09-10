@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import PdfViewer from './components/PdfViewer';
 import VoiceSelector from './components/VoiceSelector';
 import HighlightedText from './components/HighlightedText';
-import './assets/styles.css';
+// Styles import disabled temporarily to unblock dev server.
+// import './assets/styles.css';
 
 const App = () => {
   return (

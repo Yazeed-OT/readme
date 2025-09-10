@@ -1,12 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PDF Reader with AI Voice</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Reader</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,400italic&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="header">
+      <div class="logo">Book Reader</div>
+      <div class="nav">
+        <a href="#">My Books</a>
+        <a href="#">Upload Book</a>
+      </div>
+      <div class="user">user1</div>
+    </div>
+    <div class="main-container">
+      <div class="page-controls">
+        <button id="prevPageBtn">&lt; Previous</button>
+        <button id="nextPageBtn">Next &gt;</button>
+      </div>
+      <div class="book-controls">
+        <label for="voiceSelect">Voice:</label>
+        <select id="voiceSelect"></select>
+        <label for="rate">Rate</label>
+        <span id="rateValue">1.0</span>
+        <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
+        <label for="pitch">Pitch</label>
+        <span id="pitchValue">1.0</span>
+        <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
+        <input type="file" id="fileInput">
+        <button id="readBtn">Read Aloud</button>
+        <button id="stopBtn">Stop</button>
+      </div>
+      <div class="book-card">
+        <div class="book-page" id="pageLeft">
+          <span style="color:#aaa;">Load a PDF to see extracted text here.</span>
+        </div>
+        <div class="book-page" id="pageRight"></div>
+      </div>
+      <div class="progress-bar">
+        <div class="bar"><div class="bar-inner" id="progressBar"></div></div>
+        <span id="progressText">0% read</span>
+      </div>
+    </div>
   </body>
-</html>
+      </html>

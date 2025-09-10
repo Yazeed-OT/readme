@@ -15,6 +15,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@types/estree": "^1.0.8",
+    "@types/prop-types": "^15.7.15",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "typescript": "^5.5.4",
